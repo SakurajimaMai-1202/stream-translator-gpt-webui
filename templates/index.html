@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Translator</title>
+    <style>
+        body, html {
+            font-family: 'Roboto', Arial, sans-serif;
+            background-color: #1f1f1f;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            height: 99.5vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #top-section {
+            background-color: #0b0c0d;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        #logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        #logo {
+            width: 75px;
+            height: 75px;
+        }
+
+        #logo-text {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        select, input, button {
+            padding: 5px 10px;
+            background-color: #2a2a2a;
+            color: #fff;
+            border: none;
+            border-radius: 2px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #3ea6ff;
+            color: #0f0f0f;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #65b8ff;
+        }
+
+        #main-content {
+            flex-grow: 1;
+            display: flex;
+            position: relative;
+            height: calc(100vh - 40px); /* 假設頂部區域高度為 60px，根據實際情況調整 */
+        }
+
+        #stream-container {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            width: 100%;
+            transition: width 0.3s ease;
+        }
+
+        #stream-info {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: start;
+        }
+
+        #channel-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%; /* 將頭像變成圓形 */
+            object-fit: cover;
+            flex-shrink: 0;
+            margin-right: 10px;
+        }
+
+        #stream-info {
+            display: flex;
+            align-items: center;
+            background-color: rgb(11, 12, 12);
+            padding: 10px;
+        }
+#stream-info-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* 確保內部元素垂直對齊 */
+    margin: 0; /* 移除任何額外的邊距 */
+    padding: 0; /* 移除任何額外的內邊距 */
+        }
+
+       #video-title, #channel-name {
+            margin: 0;
+    margin: 0; /* 移除任何額外的邊距 */
+    padding: 0; /* 移除任何額外的內邊距 */
+    font-size: 20px;
+    line-height: 1.2; /* 確保文字垂直居中 */
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    width: 100%; /* 確保文字不會凸出 */
+        }
+
+        #video-container {
+            flex-grow: 1;
+            position: relative;
+            height: calc(118% - 120px); /* 減去頂部信息和底部字幕的高度，根據需要調整 */
+        }
+
+        #video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            height: calc(118% - 120px);
+            object-fit: contain;
+        }
+
+        #chat-container {
+            flex: 1;
+            border-left: 1px solid #444;
+            max-width: 400px;
+            height: 100%; /* 使用全部可用高度 */
+            display: none; /* 初始隱藏聊天室 */
+        }
+
+        #chat-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        #stream-and-subtitle {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        #subtitle-container {
+            position: relative;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 140px; /* 增加高度以容納六行字幕 */
+            background-color: rgba(0, 0, 0, 0.4); /* 統一的半透明黑色背景 */
+            backdrop-filter: blur(10px); /* 整體模糊效果 */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+            width: 100%;
+            transition: width 0.3s ease;
+        }
+
+        #subtitle-label {
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: bold; /* 加粗以突出標籤 */
+            opacity: 0.6; /* 稍微降低不透明度，使其與內容更加融合 */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        #subtitle-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 5px 10px;
+            font-size: 16px;
+            max-height: 140px; /* 增加高度以容納六行字幕 */
+        }
+
+        #subtitle-content p {
+            margin: 3px 0;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        /* 自定義 webkit 瀏覽器的滾動條 */
+        #subtitle-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #subtitle-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        #subtitle-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        #subtitle-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        #loading::after {
+            content: "Loading...";
+            color: white;
+            font-size: 24px;
+        }
+
+        .error-message {
+            background-color: #ff4444;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading"></div>
+
+    <div id="top-section">
+        <div id="logo-container">
+            <img id="logo" src="{{ url_for('static', filename='images/your_logo.png') }}" alt="Logo">
+            <span id="logo-text">Stream Translator</span>
+        </div>
+
+        <div id="controls">
+            <select id="platform-select">
+                <option value="youtube">YouTube</option>
+            </select>
+            <input type="text" id="stream-url" placeholder="輸入串流 URL">
+            <select id="model-select">
+                <option value="tiny">tiny</option>
+                <option value="small">small</option>
+                <option value="medium">medium</option>
+                <option value="large">large</option>
+                <option value="large-v2">large-v2</option>
+                <option value="large-v3">large-v3</option>
+            </select>
+            <select id="language-select">
+                <option value="ja">日文</option>
+                <option value="en">英文</option>
+            </select>
+            <select id="output-mode-select">
+                <option value="translation-only">僅輸出翻譯</option>
+                <option value="original-and-translation">原文&翻譯</option>
+            </select>
+            <select id="api-select">
+                <option value="local_llm">Local LLM</option>
+                <option value="gpt">ChatGPT</option>
+                <option value="gemini">Gemini</option>
+            </select>
+            <button id="start-btn" onclick="processStream()">開始轉譯</button>
+            <button id="stop-btn" onclick="stopTranslation()" disabled>停止轉譯</button>
+            <button id="toggle-chat-btn" onclick="toggleChat()">開關聊天室</button>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div id="stream-container">
+            <div id="stream-info">
+                <img id="channel-avatar" src="" alt="Channel Avatar">
+                <div id="stream-info-text">
+                    <h2 id="video-title"></h2>
+                    <p id="channel-name"></p>
+                </div>
+            </div>
+            <div id="video-container">
+                <!-- 視頻將在這裡嵌入 -->
+            </div>
+            <div id="subtitle-container">
+                <div id="subtitle-label">轉譯字幕:</div>
+                <div id="subtitle-content"></div>
+            </div>
+        </div>
+        <div id="chat-container">
+            <!-- YouTube 聊天室將在這裡嵌入 -->
+        </div>
+    </div>
+
+    <div id="error-container" class="error-message"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        let isTranslating = false;
+        let socket = io();
+
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'flex' : 'none';
+        }
+
+        function setButtonState(translating) {
+            document.getElementById('start-btn').disabled = translating;
+            document.getElementById('stop-btn').disabled = !translating;
+            document.getElementById('stream-url').disabled = translating;
+            document.getElementById('model-select').disabled = translating;
+            document.getElementById('language-select').disabled = translating;
+            document.getElementById('output-mode-select').disabled = translating;
+            document.getElementById('api-select').disabled = translating;
+        }
+
+        function showError(message) {
+            const errorContainer = document.getElementById('error-container');
+            errorContainer.textContent = message;
+            errorContainer.style.display = 'block';
+            setTimeout(() => {
+                errorContainer.style.display = 'none';
+            }, 5000);
+        }
+
+        function processStream() {
+            if (isTranslating) {
+                showError('翻譯正在進行中，請先停止當前翻譯');
+                return;
+            }
+            const url = document.getElementById('stream-url').value;
+            if (!url) {
+                showError('請輸入串流 URL');
+                return;
+            }
+            loadStreamInfo(url);
+        }
+
+        function loadStreamInfo(url) {
+            showLoading(true);
+            fetch('/stream_info', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: url })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('網絡響應不正常');
+                }
+                return response.json();
+            })
+            .then(data => {
+                showLoading(false);
+                if (data.success) {
+                    document.getElementById('channel-avatar').src = data.channelAvatar;
+                    document.getElementById('video-title').textContent = data.title;
+                    document.getElementById('channel-name').textContent = data.channel;
+                    loadYouTubeVideo(data.videoId, data.chatId);
+                    startTranslation(url);
+                } else {
+                    showError('無法獲取串流信息: ' + data.error);
+                }
+            })
+            .catch(error => {
+                showLoading(false);
+                console.error('Error:', error);
+                showError('獲取串流信息時出錯: ' + error.message);
+            });
+        }
+
+        function loadYouTubeVideo(videoId, chatId) {
+            const videoContainer = document.getElementById('video-container');
+            videoContainer.innerHTML =
+                `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>`;
+
+            const chatContainer = document.getElementById('chat-container');
+            chatContainer.innerHTML =
+                `<iframe src="https://www.youtube.com/live_chat?v=${chatId}&embed_domain=${window.location.hostname}"
+                        frameborder="0">
+                </iframe>`;
+        }
+
+        function startTranslation(url) {
+            const model = document.getElementById('model-select').value;
+            const language = document.getElementById('language-select').value;
+            const outputMode = document.getElementById('output-mode-select').value;
+            const api = document.getElementById('api-select').value;
+
+            showLoading(true);
+            fetch('/translate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    url: url,
+                    model: model,
+                    language: language,
+                    outputMode: outputMode,
+                    api: api
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('網絡響應不正常');
+                }
+                return response.json();
+            })
+            .then(data => {
+                showLoading(false);
+                if (data.success) {
+                    isTranslating = true;
+                    setButtonState(true);
+                    requestSubtitles();
+                } else {
+                    showError('翻譯失敗: ' + data.error);
+                }
+            })
+            .catch(error => {
+                showLoading(false);
+                console.error('Error:', error);
+                showError('開始翻譯時出錯: ' + error.message);
+            });
+        }
+
+        function requestSubtitles() {
+            socket.emit('request_subtitles');
+        }
+
+        socket.on('subtitles_update', function(data) {
+            const contentDiv = document.getElementById('subtitle-content');
+            const outputMode = document.getElementById('output-mode-select').value;
+
+            const recentSubtitles = data.subtitles.slice(-5);
+
+            if (outputMode === 'translation-only') {
+                contentDiv.innerHTML = recentSubtitles.map(sub => `<p>${sub.translation}</p>`).join('');
+            } else {
+                contentDiv.innerHTML = recentSubtitles.map(sub => `<p>${sub.original}<br>${sub.translation}</p>`).join('');
+            }
+
+            // 自動滾動到最新的字幕
+            contentDiv.scrollTop = contentDiv.scrollHeight;
+        });
+
+        function stopTranslation() {
+            showLoading(true);
+            fetch('/stop_translation', {
+                method: 'POST',
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('網絡響應不正常');
+                }
+                return response.json();
+            })
+            .then(data => {
+                showLoading(false);
+                if (data.success) {
+                    isTranslating = false;
+                    setButtonState(false);
+                    document.getElementById('subtitle-content').innerHTML = '';
+                } else {
+                    showError('停止翻譯失敗');
+                }
+            })
+            .catch(error => {
+                showLoading(false);
+                console.error('Error stopping translation:', error);
+                showError('停止轉譯時出錯: ' + error.message);
+            });
+        }
+
+        function toggleChat() {
+            const chatContainer = document.getElementById('chat-container');
+            const streamAndSubtitle = document.getElementById('stream-and-subtitle');
+
+            if (chatContainer.style.display === 'none') {
+                chatContainer.style.display = 'block';
+                streamAndSubtitle.style.width = 'calc(100% - 400px)';
+            } else {
+                chatContainer.style.display = 'none';
+                streamAndSubtitle.style.width = '100%';
+            }
+        }
+
+        // 更新顯示標題和頻道名的函數
+        function updateStreamInfo(title, channel) {
+            document.getElementById('video-title').textContent = title;
+            document.getElementById('channel-name').textContent = channel;
+        }
+
+        setInterval(() => {
+            if (isTranslating) {
+                requestSubtitles();
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
+
+
