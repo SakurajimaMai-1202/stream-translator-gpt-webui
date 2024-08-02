@@ -28,8 +28,11 @@ stream-translator-gpt-webui
     pip install flask flask-socketio flask-limiter  python-dotenv requests
 
 10.  如果你想用  **Gemini API**  進行翻譯，需要[**創建一個Google API密鑰**](https://aistudio.google.com/app/apikey)。 （每分鐘免費15次請求）
+
 11.  如果你想用    **GPT API**  進行翻譯，需要[**創建一個OpenAI API密鑰**](https://platform.openai.com/api-keys)
+
 12. [申請YouTube Data API key](https://gg90052.github.io/blog/yt_api_key/)
+
 13. 將此專案下載為ZIP檔案
 
 *備註
