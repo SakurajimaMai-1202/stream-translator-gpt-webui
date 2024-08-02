@@ -1,6 +1,6 @@
 # stream-translator-gpt-webui
 stream-translator-gpt-webui
-這是一個基於stream-translator-gpt用於直播轉譯成字幕並且做成翻譯的webui
+這是一個基於[stream-translator-gpt](https://github.com/ionic-bond/stream-translator-gpt)用於直播轉譯成字幕並且做成翻譯的webui
 ![](https://cdn.discordapp.com/attachments/1102904709532098610/1268862352925921384/Clip_2024-08-02_17-24-40.png?ex=66adf7a7&is=66aca627&hm=a7b139f731f73aa51307dc2af91bbd1e9a2b6976e5f33be6c0b4203b734d3dff&)
 
 準備工作
