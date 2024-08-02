@@ -7,23 +7,23 @@ stream-translator-gpt-webui
 
 1.安裝[Python 3.10(](https://www.python.org/downloads/release/python-3100/)推薦)
 
-2.[安裝CUDA12.1](https://cangmang.xyz/articles/1682852371010) (推薦)
+2.安裝[CUDA12.1](https://cangmang.xyz/articles/1682852371010) (推薦)
 
-3.[安裝CUDNN](https://cangmang.xyz/articles/1682852371010%29)
+3.安裝[CUDNN](https://cangmang.xyz/articles/1682852371010%29)
 
-4.[安裝Pytorch](https://pytorch.org/get-started/locally/)(要匹配CUDA版本)
+4.安裝[Pytorch](https://pytorch.org/get-started/locally/)(要匹配CUDA版本)
 
-5.[安裝ffmpeg](https://ffmpeg.org/download.html)
+5.安裝[ffmpeg](https://ffmpeg.org/download.html)
 
-6.[安裝yt-dlp](https://github.com/yt-dlp/yt-dlp) 建議使用PIP拉取
+6.安裝[yt-dlp](https://github.com/yt-dlp/yt-dlp) 建議使用PIP拉取
 
 7.安裝[stream-translator-gpt](https://github.com/ionic-bond/stream-translator-gpt/blob/main/README_CN.md)
 
-8.[安裝redis](https://github.com/tporadowski/redis/releases)(建議到github上下載)
+8.安裝[redis](https://github.com/tporadowski/redis/releases)(建議到github上下載)
 
 9.安裝其他依賴項
 
-    pip install flask flask-socketio flask-limiter  python-dotenv yt-dlp requests
+    pip install flask flask-socketio flask-limiter  python-dotenv requests
 
 10.  如果你想用  **Gemini API**  進行翻譯，需要[**創建一個Google API密鑰**](https://aistudio.google.com/app/apikey)。 （每分鐘免費15次請求）
 11.  如果你想用    **GPT API**  進行翻譯，需要[**創建一個OpenAI API密鑰**](https://platform.openai.com/api-keys)
@@ -34,11 +34,16 @@ ffmpeg,redis,cuda,cudnn 需要寫入系統的環境變數path內
 並且需要在關閉網頁後 手動將後台的CMD視窗給關閉
 
 
-#如何執行 
+如何執行 
+
 1.解壓縮zip檔
+
 2.請用記事本打開.env 輸入翻譯的api key 與YouTube Data API key 
+
 3.在資料夾內右鍵以終端開啟
+
 4.打包為exe 在終端內輸入pyinstaller youtube_translator.spec 會自動打包為exe exe檔會在你的資料夾內的dist資料夾內 以後直接執行exe即可
+
 5.若不想打包 可以直接輸入 python app.py做執行，
 
 
