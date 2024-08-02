@@ -27,7 +27,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='直播即時轉譯',
+    name='stream-translator-gpt-webui',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
