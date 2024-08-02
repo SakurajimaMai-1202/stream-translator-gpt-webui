@@ -31,6 +31,7 @@ stream-translator-gpt-webui
 11.  如果你想用    **GPT API**  進行翻譯，需要[**創建一個OpenAI API密鑰**](https://platform.openai.com/api-keys)
 12. [申請YouTube Data API key](https://gg90052.github.io/blog/yt_api_key/)
 13. 將此專案下載為ZIP檔案
+
 *備註
 ffmpeg,redis,cuda,cudnn 需要寫入系統的環境變數path內
 並且需要在關閉網頁後 手動將後台的CMD視窗給關閉
