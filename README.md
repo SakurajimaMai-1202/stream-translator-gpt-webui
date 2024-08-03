@@ -1,8 +1,6 @@
 # **stream-translator-gpt-webui**
 stream-translator-gpt-webui
-這是一個基於[stream-translator-gpt](https://github.com/ionic-bond/stream-translator-gpt)的專案
-
-主要是用於 youtube 直播轉譯字幕並且透過大型語言模型做翻譯並將 直播/聊天室/字幕轉譯 這三項結合為一個頁面 提供不懂其他語言的人可以更好的觀看其他語言的直播
+本專案基於 [stream-translator-gpt](https://github.com/ionic-bond/stream-translator-gpt)，旨在提供一個解決方案，讓觀眾能夠在觀看 YouTube 直播時，實時轉譯字幕並透過大型語言模型進行翻譯。這個網頁將直播、聊天室和字幕轉譯三項功能結合於一個頁面，為不懂其他語言的觀眾提供更好的直播觀看體驗
 ![](https://cdn.discordapp.com/attachments/1102904709532098610/1268862352925921384/Clip_2024-08-02_17-24-40.png?ex=66adf7a7&is=66aca627&hm=a7b139f731f73aa51307dc2af91bbd1e9a2b6976e5f33be6c0b4203b734d3dff&)
 (此圖片的翻譯模型為gemma-27b)
 
@@ -32,9 +30,12 @@ stream-translator-gpt-webui
 
 11.  如果你想用    **GPT API**  進行翻譯，需要[**創建一個OpenAI API密鑰**](https://platform.openai.com/api-keys)
 
-12. [申請YouTube Data API key](https://gg90052.github.io/blog/yt_api_key/)
+12. 如果你想用 **Local LLM **進行翻譯 你需要自行架設或是用兼容openai api的方式 主要需要填入自架的大模型網址&api key (目前測試過 sakura 14b /gemma 27b/ llama 3.1 8b)
+  
+13. [申請YouTube Data API key](https://gg90052.github.io/blog/yt_api_key/)
 
-13. 將此專案下載為ZIP檔案
+14. 將此專案下載為ZIP檔案
+ 
 
 *備註
 ffmpeg,redis,cuda,cudnn 需要寫入系統的環境變數path內
@@ -52,6 +53,9 @@ ffmpeg,redis,cuda,cudnn 需要寫入系統的環境變數path內
 4.打包為exe 在終端內輸入pyinstaller youtube_translator.spec 會自動打包為exe exe檔會在你的資料夾內的dist資料夾內 以後直接執行exe即可
 
 5.若不想打包 可以直接輸入 python app.py做執行，
+
+
+
 
 
 目前疑似問題:shorts類的直式直播 網址需要從底下的分享複製網址才會正常 否則會將whisper鎖在small並且 無法執行翻譯指令
