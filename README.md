@@ -4,7 +4,7 @@ stream-translator-gpt-webui
 
 將直播、聊天室和字幕轉譯三項功能結合於一個頁面，為不懂其他語言的觀眾提供更好的直播觀看體驗
 ![](https://cdn.discordapp.com/attachments/1102904709532098610/1268862352925921384/Clip_2024-08-02_17-24-40.png?ex=66adf7a7&is=66aca627&hm=a7b139f731f73aa51307dc2af91bbd1e9a2b6976e5f33be6c0b4203b734d3dff&)
-(此圖片的翻譯模型為gemma-27b)
+(此圖片的翻譯模型為gemma2-27b)
 
 準備工作(windows)
 
