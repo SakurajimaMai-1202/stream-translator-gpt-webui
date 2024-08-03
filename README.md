@@ -2,7 +2,7 @@
 stream-translator-gpt-webui
 這是一個基於[stream-translator-gpt](https://github.com/ionic-bond/stream-translator-gpt)的專案
 
-主要是用於 youtube 直播轉譯字幕並且透過大型語言模型做翻譯呈現在網頁上
+主要是用於 youtube 直播轉譯字幕並且透過大型語言模型做翻譯並將 直播/聊天室/字幕轉譯 這三項結合為一個頁面 提供不懂其他語言的人可以更好的觀看其他語言的直播
 ![](https://cdn.discordapp.com/attachments/1102904709532098610/1268862352925921384/Clip_2024-08-02_17-24-40.png?ex=66adf7a7&is=66aca627&hm=a7b139f731f73aa51307dc2af91bbd1e9a2b6976e5f33be6c0b4203b734d3dff&)
 (此圖片的翻譯模型為gemma-27b)
 
