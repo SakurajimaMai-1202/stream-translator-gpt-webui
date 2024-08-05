@@ -3,7 +3,7 @@ stream-translator-gpt-webui
 English | 繁體中文
 本專案基於 [stream-translator-gpt](https://github.com/ionic-bond/stream-translator-gpt)，旨在提供一個觀眾能夠在觀看 YouTube 直播時，實時轉譯字幕並透過大型語言模型進行翻譯。
 
-將直播、聊天室和字幕轉譯三項功能結合於一個頁面，為不懂其他語言的觀眾提供更好的直播觀看體驗
+將直播、聊天室和字幕轉譯三項功能結合於一個頁面，為不懂其他語言的觀眾提供更好的直播觀看體驗 (目前開放日轉中與英轉中)
 ![](https://cdn.discordapp.com/attachments/1102904709532098610/1268862352925921384/Clip_2024-08-02_17-24-40.png?ex=66adf7a7&is=66aca627&hm=a7b139f731f73aa51307dc2af91bbd1e9a2b6976e5f33be6c0b4203b734d3dff&)
 (此圖片的翻譯模型為gemma2-27b)
 
@@ -11,9 +11,9 @@ English | 繁體中文
 
 1.安裝[Python 3.10(](https://www.python.org/downloads/release/python-3100/)推薦)
 
-2.安裝[CUDA12.1](https://cangmang.xyz/articles/1682852371010) (推薦)
+2.安裝[CUDA12.1](https://developer.nvidia.com/cuda-12-1-0-download-archive) (推薦)
 
-3.安裝[CUDNN](https://cangmang.xyz/articles/1682852371010%29)
+3.安裝[CUDNN](https://developer.nvidia.com/rdp/cudnn-archive)
 
 4.安裝[Pytorch](https://pytorch.org/get-started/locally/)(要匹配CUDA版本)
 
