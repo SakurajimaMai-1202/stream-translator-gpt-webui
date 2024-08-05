@@ -1,5 +1,6 @@
 # **stream-translator-gpt-webui**
 stream-translator-gpt-webui
+English | 繁體中文
 本專案基於 [stream-translator-gpt](https://github.com/ionic-bond/stream-translator-gpt)，旨在提供一個觀眾能夠在觀看 YouTube 直播時，實時轉譯字幕並透過大型語言模型進行翻譯。
 
 將直播、聊天室和字幕轉譯三項功能結合於一個頁面，為不懂其他語言的觀眾提供更好的直播觀看體驗
