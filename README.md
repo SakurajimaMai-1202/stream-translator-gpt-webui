@@ -46,10 +46,13 @@ Preparation (Windows)
 *Note
 ffmpeg, redis, cuda, cudnn need to be written into the system's environment variable path.
 After closing the webpage, you need to manually close the CMD window in the background.
-How to run
+
+**How to run**
 
 Unzip the ZIP file
+
 Open the .env file with Notepad and enter the translation API key and YouTube Data API key
+
 Right-click in the folder and open terminal
 
 To package as an exe, enter pyinstaller youtube_translator.spec in the terminal. It will automatically package as an exe. The exe file will be in the dist folder in your folder. You can directly run the exe file in the future.
