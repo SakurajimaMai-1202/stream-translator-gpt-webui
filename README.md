@@ -1,6 +1,7 @@
 # **stream-translator-gpt-webui**
 stream-translator-gpt-webui 
 
+English | [繁體中文](https://github.com/SakurajimaMai-1202/stream-translator-gpt-webui/blob/main/README_zh_tw.md) 
 
 stream-translator-gpt-webui
 This project is based on stream-translator-gpt, aiming to provide viewers with real-time subtitle translation using large language models while watching YouTube live streams.
