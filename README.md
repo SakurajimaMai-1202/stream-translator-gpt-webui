@@ -6,7 +6,8 @@ English | [繁體中文](https://github.com/SakurajimaMai-1202/stream-translator
 stream-translator-gpt-webui
 This project is based on stream-translator-gpt, aiming to provide viewers with real-time subtitle translation using large language models while watching YouTube live streams.
 
-It combines live streaming, chat room, and subtitle translation features on a single page, offering a better live streaming experience for viewers who don't understand other languages. (Currently available for Japanese to Chinese and English to Chinese translation)
+It combines live streaming, chat room, and subtitle translation features on a single page, offering a better live streaming experience for viewers who don't understand other languages. Currently supports mutual translation between Japanese, English, and Chinese.
+
 ![](https://cdn.discordapp.com/attachments/1102904709532098610/1268862352925921384/Clip_2024-08-02_17-24-40.png?ex=66adf7a7&is=66aca627&hm=a7b139f731f73aa51307dc2af91bbd1e9a2b6976e5f33be6c0b4203b734d3dff&)
 
 (The translation model in this image is gemma2-27b)
