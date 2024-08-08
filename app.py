@@ -68,16 +68,34 @@ def check_redis(max_retries=5, delay=1):
 translation_process = None
 should_restart = True
 
-def run_translation(url, model, language, output_mode, translation_model):
+def run_translation(url, model, source_language, target_language, output_mode, translation_model):
     global translation_process, should_restart
     while should_restart:
         hide_transcribe = "--hide_transcribe_result" if output_mode == "translation-only" else ""
+        translation_prompt = ""
+
+        if source_language == "ja" and target_language == "zh":
+            translation_prompt = "Translate from Japanese to Traditional Chinese"
+        elif source_language == "ja" and target_language == "en":
+            translation_prompt = "Translate from Japanese to English"
+        elif source_language == "zh" and target_language == "en":
+            translation_prompt = "Translate from Chinese to English"
+        elif source_language == "zh" and target_language == "ja":
+            translation_prompt = "Translate from Chinese to Japanese"
+        elif source_language == "en" and target_language == "zh":
+            translation_prompt = "Translate from English to Traditional Chinese"
+        elif source_language == "en" and target_language == "ja":
+            translation_prompt = "Translate from English to Japanese"
+        else:
+            print("未知的翻譯語言組合")
+            return
+
         if translation_model == "local_llm":
-            command = f"stream-translator-gpt {url} --model {model} --language {language} --use_faster_whisper --gpt_base_url {os.getenv('GPT_BASE_URL')} --gpt_translation_prompt \"Translate from Japanese to Traditional Chinese\" --openai_api_key {os.getenv('GPT_BASE_URL_API_KEY')} {hide_transcribe} --output_timestamps --max_audio_length 15 --output_file_path ./result.srt"
+            command = f"stream-translator-gpt {url} --model {model} --language {source_language} --use_faster_whisper --gpt_base_url {os.getenv('GPT_BASE_URL')} --gpt_translation_prompt \"{translation_prompt}\" --openai_api_key {os.getenv('GPT_BASE_URL_API_KEY')} {hide_transcribe} --output_timestamps --max_audio_length 15 --output_file_path ./result.srt"
         elif translation_model == "gpt":
-            command = f"stream-translator-gpt {url} --model {model} --language {language} --use_faster_whisper --gpt_translation_prompt \"Translate from Japanese to Chinese\" --openai_api_key {os.getenv('OPENAI_API_KEY')} {hide_transcribe} --output_timestamps --max_audio_length 15 --output_file_path ./result.srt"
+            command = f"stream-translator-gpt {url} --model {model} --language {source_language} --use_faster_whisper --gpt_translation_prompt \"{translation_prompt}\" --openai_api_key {os.getenv('OPENAI_API_KEY')} {hide_transcribe} --output_timestamps --max_audio_length 15 --output_file_path ./result.srt"
         elif translation_model == "gemini":
-            command = f"stream-translator-gpt {url} --model {model} --language {language} --use_faster_whisper --gpt_translation_prompt \"Translate from Japanese to Chinese\" --google_api_key {os.getenv('GOOGLE_API_KEY')} {hide_transcribe} --output_timestamps --max_audio_length 15 --output_file_path ./result.srt"
+            command = f"stream-translator-gpt {url} --model {model} --language {source_language} --use_faster_whisper --gpt_translation_prompt \"{translation_prompt}\" --google_api_key {os.getenv('GOOGLE_API_KEY')} {hide_transcribe} --output_timestamps --max_audio_length 15 --output_file_path ./result.srt"
         else:
             print("未知的翻譯模型")
             return
@@ -135,11 +153,12 @@ def translate():
     data = request.json
     url = data.get('url')
     model = data.get('model')
-    language = data.get('language')
+    source_language = data.get('sourceLanguage')
+    target_language = data.get('targetLanguage')
     output_mode = data.get('outputMode')
     translation_model = data.get('api')
 
-    if not all([url, model, language, output_mode, translation_model]):
+    if not all([url, model, source_language, target_language, output_mode, translation_model]):
         return jsonify({"success": False, "error": "缺少必要參數"}), 400
 
     if translation_process:
@@ -151,7 +170,7 @@ def translate():
         os.remove('./result.srt')
 
     should_restart = True
-    threading.Thread(target=run_translation, args=(url, model, language, output_mode, translation_model)).start()
+    threading.Thread(target=run_translation, args=(url, model, source_language, target_language, output_mode, translation_model)).start()
     return jsonify({"success": True})
 
 @socketio.on('request_subtitles')
@@ -215,3 +234,4 @@ if __name__ == '__main__':
         print(f"程序啟動時發生錯誤：{e}")
         import traceback
         traceback.print_exc()
+
