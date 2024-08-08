@@ -288,12 +288,13 @@
                 <option value="large-v3">large-v3</option>
             </select>
             <select id="output-mode-select">
-                <option value="subtitles-only">字幕輸出</option>
+                <option value="">字幕輸出</option>
                 <option value="translation-only">僅輸出翻譯</option>
                 <option value="original-and-translation">原文&翻譯</option>
             </select>
             <select id="api-select">
-                <option value="local_llm">LLM選擇</option>
+                <option value="">LLM選擇</option>
+                <option value="local_llm">本地LLM</option>
                 <option value="gpt">ChatGPT</option>
                 <option value="gemini">Gemini</option>
             </select>
@@ -363,6 +364,7 @@
                 subtitleLabel: 'Translated Subtitles:',
                 toggleLanguage: 'Switch webpage language',
                 apiSelectDefault: 'LLM Selection',
+                apiSelectLocalLlm: 'Local LLM',
                 apiSelectGpt: 'ChatGPT',
                 apiSelectGemini: 'Gemini',
             },
@@ -394,6 +396,7 @@
                 subtitleLabel: '轉譯字幕:',
                 toggleLanguage: '切換網頁語言',
                 apiSelectDefault: 'LLM選擇',
+                apiSelectLocalLlm: '本地LLM',
                 apiSelectGpt: 'ChatGPT',
                 apiSelectGemini: 'Gemini',
             },
@@ -421,10 +424,11 @@
                 modelSelectLargeV3: 'large-v3',
                 outputModeSelectSubtitlesOnly: '字幕出力',
                 outputModeSelectTranslationOnly: '翻訳のみ',
-                outputModeSelectOriginalAndTranslation: '原文と翻訳',
+                outputModeSelectOriginalAndTranslation: '原文と翻譯',
                 subtitleLabel: '翻訳された字幕:',
                 toggleLanguage: 'ウェブページの言語を切り替える',
                 apiSelectDefault: 'LLM選択',
+                apiSelectLocalLlm: 'ローカルLLM',
                 apiSelectGpt: 'ChatGPT',
                 apiSelectGemini: 'Gemini',
             }
@@ -469,8 +473,9 @@
             document.getElementById('loading').textContent = lang.loading;
             document.getElementById('language-toggle-btn').textContent = lang.toggleLanguage;
             document.getElementById('api-select').options[0].text = lang.apiSelectDefault;
-            document.getElementById('api-select').options[1].text = lang.apiSelectGpt;
-            document.getElementById('api-select').options[2].text = lang.apiSelectGemini;
+            document.getElementById('api-select').options[1].text = lang.apiSelectLocalLlm;
+            document.getElementById('api-select').options[2].text = lang.apiSelectGpt;
+            document.getElementById('api-select').options[3].text = lang.apiSelectGemini;
         }
 
         // 初始化語言
