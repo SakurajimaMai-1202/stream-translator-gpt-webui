@@ -25,9 +25,9 @@ English | 繁體中文
 
 8.安裝[redis](https://github.com/tporadowski/redis/releases)(建議到github上下載)
 
-9.安裝其他依賴項
+9.安裝依賴項 PIP
 
-    pip install flask flask-socketio flask-limiter  python-dotenv requests
+    pip install flask flask-socketio flask-limiter  python-dotenv requests yt-dlp ffmpeg 
 
 10.  如果你想用  **Gemini API**  進行翻譯，需要[**創建一個Google API密鑰**](https://aistudio.google.com/app/apikey)。 （每分鐘免費15次請求）
 
