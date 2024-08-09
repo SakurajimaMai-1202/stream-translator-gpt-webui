@@ -32,7 +32,7 @@ Preparation (Windows)
 
 9.Install  dependencies:
 
-    pip install flask flask-socketio flask-limiter  python-dotenv requests yt-dlp ffmpeg 
+    pip install flask flask-socketio flask-limiter  python-dotenv requests yt-dlp ffmpeg  gevent
 
 10.If you want to use Gemini API for translation, [you need to create a Google API key.](https://aistudio.google.com/app/apikey) (15 free requests per minute)
 
@@ -47,15 +47,30 @@ Preparation (Windows)
 *Note
 ffmpeg, redis, cuda, cudnn need to be written into the system's environment variable path.
 After closing the webpage, you need to manually close the CMD window in the background.
+If you encounter torch-related errors, you can try using this:
 
+Copy
+    pip3 install torch==2.2.2 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+The environment variable PATH needs to include the following. If you've installed them in other locations, modify the paths accordingly based on where you've installed them:
+```
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\bin
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\libnvvp
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\include
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\lib
+C:\Users\User\AppData\Local\Programs\Python\Python310\
+C:\Users\User\AppData\Local\Programs\Python\Python310\Scripts\
+C:\Program Files\Redis
+C:\ffmpeg\bin
+```
 **How to run**
 
-Unzip the ZIP file
+1.Unzip the ZIP file.
 
-Open the .env file with Notepad and enter the translation API key and YouTube Data API key
+2.Open the .env file with Notepad and enter your translation API key and YouTube Data API key.
 
-Right-click in the folder and open terminal
+3.Right-click inside the folder and select "Open in Terminal" or "Open command window here".
 
-To package as an exe, enter pyinstaller youtube_translator.spec in the terminal. It will automatically package as an exe. The exe file will be in the dist folder in your folder. You can directly run the exe file in the future.
+4.Run the program by typing python app.py in the terminal.
 
-If you don't want to package it, you can directly enter python app.py to run it.
+5.If you want a one-click solution, go to the releases section and download the pre-packaged EXE file. Place it in the folder, and you can use it directly.
