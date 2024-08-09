@@ -69,7 +69,7 @@ ffmpeg,redis,cuda,cudnn 需要寫入系統的環境變數path內
 
 3.在資料夾內右鍵以終端開啟
 
-4. 直接輸入 python app.py做執行，
+4.直接輸入python app.py做執行，
 
 5.若想要一鍵開啟可以到releases下載我已經打包好的exe檔案 放入資料夾內 即可使用
 
