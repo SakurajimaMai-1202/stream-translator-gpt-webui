@@ -30,9 +30,9 @@ Preparation (Windows)
 
 8.Install [redis](https://github.com/tporadowski/redis/releases) (recommended to download from GitHub)
 
-9.Install other dependencies:
+9.Install  dependencies:
 
-    pip install flask flask-socketio flask-limiter  python-dotenv requests
+    pip install flask flask-socketio flask-limiter  python-dotenv requests yt-dlp ffmpeg 
 
 10.If you want to use Gemini API for translation, [you need to create a Google API key.](https://aistudio.google.com/app/apikey) (15 free requests per minute)
 
