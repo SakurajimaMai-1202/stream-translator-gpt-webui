@@ -44,6 +44,10 @@ English | 繁體中文
 ffmpeg,redis,cuda,cudnn 需要寫入系統的環境變數path內
 並且需要在關閉網頁後 手動將後台的CMD視窗給關閉
 
+若遇到torch相關錯誤 可以嘗試使用這個 
+
+    pip3 install torch==2.2.2 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
 
 如何執行 
 
