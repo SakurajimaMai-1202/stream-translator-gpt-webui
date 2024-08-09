@@ -71,6 +71,7 @@ ffmpeg,redis,cuda,cudnn 需要寫入系統的環境變數path內
 
 4. 直接輸入 python app.py做執行，
 
+5.若想要一鍵開啟可以到releases下載我已經打包好的exe檔案 放入資料夾內 即可使用
 
 
 目前疑似問題:shorts類的直式直播 網址需要從底下的分享複製網址才會正常 否則會將whisper鎖在small並且 無法執行翻譯指令
