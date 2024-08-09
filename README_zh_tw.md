@@ -69,7 +69,14 @@ ffmpeg,redis,cuda,cudnn 需要寫入系統的環境變數path內
 
 3.在資料夾內右鍵以終端開啟
 
-4.打包為exe 在終端內輸入pyinstaller youtube_translator.spec 會自動打包為exe exe檔會在你的資料夾內的dist資料夾內 以後直接執行exe即可
+4.打包為exe 需先安裝pyinstaller 
+
+    pip install pyinstaller 
+在終端內輸入
+
+    pyinstaller youtube_translator.spec 
+
+會自動打包為exe exe檔會在你的資料夾內的dist資料夾內 以後直接執行exe即可
 
 5.若不想打包 可以直接輸入 python app.py做執行，
 
