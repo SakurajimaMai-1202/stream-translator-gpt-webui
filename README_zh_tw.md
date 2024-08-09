@@ -48,6 +48,18 @@ ffmpeg,redis,cuda,cudnn 需要寫入系統的環境變數path內
 
     pip3 install torch==2.2.2 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
+環境變數path內需要有以下這幾個 若你裝在其他地方 就依照這個格式下去改 看你安裝在哪邊
+```
+     C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\bin
+     C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\libnvvp
+     C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\include
+     C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.1\lib
+     C:\Users\User\AppData\Local\Programs\Python\Python310\
+     C:\Users\User\AppData\Local\Programs\Python\Python310\Scripts\
+     C:\Program Files\Redis
+     C:\ffmpeg\bin
+```
+
 
 如何執行 
 
