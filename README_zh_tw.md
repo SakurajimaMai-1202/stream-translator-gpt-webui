@@ -33,7 +33,7 @@ English | 繁體中文
 
 11.  如果你想用    **GPT API**  進行翻譯，需要[**創建一個OpenAI API密鑰**](https://platform.openai.com/api-keys)
 
-12. 如果你想用 **Local LLM **進行翻譯 你需要自行架設或是用兼容openai api的方式 主要需要填入自架的大模型網址&api key (目前測試過 sakura 14b /gemma 27b/ llama 3.1 8b)
+12. 如果你想用 **Local LLM**進行翻譯 你需要自行架設或是用兼容openai api的方式 主要需要填入自架的大模型網址&api key (目前測試過 sakura 14b /gemma 27b/ llama 3.1 8b)
   
 13. [申請YouTube Data API key](https://gg90052.github.io/blog/yt_api_key/)
 
