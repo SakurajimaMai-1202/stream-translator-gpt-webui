@@ -9,6 +9,8 @@ This project is based on stream-translator-gpt, aiming to provide viewers with r
 It combines live streaming, chat room, and subtitle translation features on a single page, offering a better live streaming experience for viewers who don't understand other languages. Currently supports mutual translation between Japanese, English, and Chinese.
 
 ![](https://cdn.discordapp.com/attachments/1102904709532098610/1268862352925921384/Clip_2024-08-02_17-24-40.png?ex=66adf7a7&is=66aca627&hm=a7b139f731f73aa51307dc2af91bbd1e9a2b6976e5f33be6c0b4203b734d3dff&)
+![Clip_2024-09-12_15-19-48](https://github.com/user-attachments/assets/d77ba9c1-aa7b-4a6b-8d16-dfd6c76cef61)
+
 
 (The translation model in this image is gemma2-27b)
 
